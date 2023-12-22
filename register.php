@@ -5,15 +5,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $stmt = $pdo->prepare("INSERT INTO utilisateurs VALUES ('$username', '$password')");
-    $stmt->execute();
+    $stmt = $pdo->prepare("INSERT INTO utilisateurs (username, password) VALUES (?, ?)");
+    $stmt->execute([$username, $password]);
 
     header('Location: login.php');
-    exit();
 }
 
-// Formulaire d'inscription
 ?>
+
+<!-- Formulaire d'inscription -->
 <!DOCTYPE html>
 <html>
 <head>
